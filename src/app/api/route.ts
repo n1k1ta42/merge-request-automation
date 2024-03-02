@@ -55,6 +55,7 @@ export async function POST(request: Request) {
         },
         data: {
           reviewAt: new Date(),
+          lastAction: data.object_attributes.action,
         },
       })
     }
@@ -90,6 +91,7 @@ export async function POST(request: Request) {
         },
         data: {
           testingAt: new Date(),
+          lastAction: data.object_attributes.action,
         },
       })
     }
@@ -115,6 +117,7 @@ export async function POST(request: Request) {
         },
         data: {
           finishAt: new Date(),
+          lastAction: data.object_attributes.action,
         },
       })
     }
