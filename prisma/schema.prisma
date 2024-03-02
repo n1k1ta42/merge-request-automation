@@ -44,18 +44,17 @@ model MergeRequest {
   repositoryName          String
   repositoryHomepage      String
   targetBranch            String
+  lastAtion               Action
+  state                   Action
   assigneeIds             Int[]
   reviewerIds             Int[]
   labels                  String[]
-  isDraft                 Boolean
-  lastAtion               Action
-  state                   Action
   developmentStageStartAt DateTime
-  developmentStageEndAt   DateTime
-  reviewStageStartAt      DateTime
-  reviewStageEndAt        DateTime
-  testingStageStartAt     DateTime
-  testingStageEndAt       DateTime
-  finishStageStartAt      DateTime
-  finishStageEndAt        DateTime
+  developmentStageEndAt   DateTime?
+  reviewStageStartAt      DateTime?
+  reviewStageEndAt        DateTime?
+  testingStageStartAt     DateTime?
+  testingStageEndAt       DateTime?
+  finishStageStartAt      DateTime?
+  finishStageEndAt        DateTime?
 }
