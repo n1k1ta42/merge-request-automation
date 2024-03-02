@@ -45,7 +45,6 @@ model MergeRequest {
   repositoryHomepage      String
   targetBranch            String
   lastAtion               Action
-  state                   Action
   assigneeIds             Int[]
   reviewerIds             Int[]
   labels                  String[]

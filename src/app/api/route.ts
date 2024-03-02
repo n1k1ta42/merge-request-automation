@@ -15,7 +15,6 @@ export async function POST(request: Request) {
         repositoryHomepage: data.repository.homepage,
         targetBranch: data.object_attributes.target_branch,
         lastAtion: data.object_attributes.action,
-        state: data.object_attributes.state,
         developmentStageStartAt: new Date(),
       },
     })
