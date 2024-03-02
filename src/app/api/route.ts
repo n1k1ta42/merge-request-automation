@@ -17,7 +17,7 @@ export async function POST(request: Request) {
         //   reviewer_ids: [3],
         // }),
         body: JSON.stringify({
-          title: 'Draft: Тест',
+          title: `Draft: ${data.object_attributes.title}`,
         }),
       },
     )
