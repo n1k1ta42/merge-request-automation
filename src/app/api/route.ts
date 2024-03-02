@@ -93,5 +93,30 @@ export async function POST(request: Request) {
       })
     }
   }
+  if (data.object_attributes.action === 'merge') {
+    const mergeRequest = await prisma.mergeRequest.findFirst({
+      where: {
+        AND: [
+          {
+            projectId: data.object_attributes.target_project_id,
+          },
+          {
+            iid: data.object_attributes.iid,
+          },
+        ],
+      },
+    })
+
+    if (mergeRequest) {
+      await prisma.mergeRequest.update({
+        where: {
+          id: mergeRequest.id,
+        },
+        data: {
+          finishAt: new Date(),
+        },
+      })
+    }
+  }
   return Response.json({ isOk: true })
 }
