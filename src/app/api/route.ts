@@ -32,5 +32,23 @@ export async function POST(request: Request) {
       },
     )
   }
+  if (
+    data.object_attributes.action === 'update' &&
+    !data.object_attributes.title.startsWith('Draft:')
+  ) {
+    await fetch(
+      `https://git.yamal-media.ru/api/v4/projects/${data.object_attributes.target_project_id}/merge_requests/${data.object_attributes.iid}`,
+      {
+        method: 'PUT',
+        headers: {
+          'PRIVATE-TOKEN': process.env.GIT_LAB_TOKEN ?? '',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          reviewer_ids: [3],
+        }),
+      },
+    )
+  }
   return Response.json({ isOk: true })
 }
