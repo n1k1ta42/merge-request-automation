@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   const data = await request.json()
   if (data.object_attributes.action === 'open') {
     await fetch(
-      `https://git.yamal-media.ru/api/v4/projects/${data.project.id}/merge_requests${data.object_attributes.iid}`,
+      `https://git.yamal-media.ru/api/v4/projects/${data.object_attributes.target_project_id}/merge_requests${data.object_attributes.iid}`,
       {
         method: 'POST',
         headers: {
@@ -14,10 +14,10 @@ export async function POST(request: Request) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: 'DRAFT' + ' ' + data.data.object_attributes.title,
+          title: 'Draft:' + ' ' + data.object_attributes.title,
         }),
       },
     )
   }
-  return Response.json({ isOk: true, body: await request.json() })
+  return Response.json({ isOk: true })
 }
