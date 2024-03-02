@@ -39,7 +39,7 @@ export default async function Page() {
         </TableHeader>
         <TableBody>
           {data.map(item => (
-            <TableRow>
+            <TableRow key={item.id}>
               <TableCell>
                 <Button variant='link' asChild>
                   <Link
