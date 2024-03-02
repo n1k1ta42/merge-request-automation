@@ -13,12 +13,12 @@ export async function GET(request: Request) {
         'PRIVATE-TOKEN': process.env.GIT_LAB_TOKEN ?? '',
         'Content-Type': 'application/json',
       },
-      // body: JSON.stringify({
-      //   reviewer_ids: [3],
-      // }),
       body: JSON.stringify({
-        title: 'Draft: Тест',
+        reviewer_ids: [3],
       }),
+      // body: JSON.stringify({
+      //   title: 'Draft: Тест',
+      // }),
     },
   )
   // }
