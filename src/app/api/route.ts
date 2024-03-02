@@ -32,8 +32,8 @@ export async function POST(request: Request) {
 
   if (
     data.object_attributes.action === 'update' &&
-    data.changes.draft.previous === true &&
-    data.changes.draft.next === false
+    Boolean(data.changes.draft.previous) &&
+    !Boolean(data.changes.draft.next)
   ) {
     const mergeRequest = await prisma.mergeRequest.findFirst({
       where: {
