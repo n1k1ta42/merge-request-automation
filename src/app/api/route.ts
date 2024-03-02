@@ -30,44 +30,45 @@ export async function POST(request: Request) {
     )
   }
 
-  // if (
-  //   data.object_attributes.action === 'update' &&
-  //   !data.object_attributes.title.startsWith('Draft:')
-  // ) {
-  //   const mergeRequest = await prisma.mergeRequest.findFirst({
-  //     where: {
-  //       AND: [
-  //         {
-  //           projectId: data.object_attributes.target_project_id,
-  //         },
-  //         {
-  //           iid: data.object_attributes.iid,
-  //         },
-  //       ],
-  //     },
-  //   })
-  //
-  //   if (mergeRequest) {
-  //     await prisma.mergeRequest.update({
-  //       where: {
-  //         id: mergeRequest.id,
-  //       },
-  //       data: {
-  //         reviewAt: new Date(),
-  //       },
-  //     })
-  //   }
-  //
-  //   await api.put(
-  //     getUpdateMrApiUrl(
-  //       data.object_attributes.target_project_id,
-  //       data.object_attributes.iid,
-  //     ),
-  //     JSON.stringify({
-  //       reviewer_ids: [3],
-  //     }),
-  //   )
-  // }
+  if (
+    data.object_attributes.action === 'update' &&
+    data.changes.draft.previous === true &&
+    data.changes.draft.next === false
+  ) {
+    const mergeRequest = await prisma.mergeRequest.findFirst({
+      where: {
+        AND: [
+          {
+            projectId: data.object_attributes.target_project_id,
+          },
+          {
+            iid: data.object_attributes.iid,
+          },
+        ],
+      },
+    })
+
+    if (mergeRequest) {
+      await prisma.mergeRequest.update({
+        where: {
+          id: mergeRequest.id,
+        },
+        data: {
+          reviewAt: new Date(),
+        },
+      })
+    }
+
+    await api.put(
+      getUpdateMrApiUrl(
+        data.object_attributes.target_project_id,
+        data.object_attributes.iid,
+      ),
+      JSON.stringify({
+        reviewer_ids: [3],
+      }),
+    )
+  }
   if (data.object_attributes.action === 'approved') {
     const mergeRequest = await prisma.mergeRequest.findFirst({
       where: {
