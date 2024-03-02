@@ -1,1 +1,3 @@
 # merge-request-automation
+
+---
