@@ -14,13 +14,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-enum MergeRequestStatus {
-  development
-  review
-  testing
-  finish
-}
-
 enum Action {
   open
   close
@@ -34,26 +27,15 @@ enum Action {
 }
 
 model MergeRequest {
-  id                      Int                @id @default(autoincrement())
-  createdAt               DateTime           @default(now())
-  updatedAt               DateTime           @updatedAt()
-  status                  MergeRequestStatus @default(development)
-  authorId                Int
-  authorName              String
-  authorUsername          String
-  repositoryName          String
-  repositoryHomepage      String
-  targetBranch            String
-  lastAtion               Action
-  assigneeIds             Int[]
-  reviewerIds             Int[]
-  labels                  String[]
-  developmentStageStartAt DateTime
-  developmentStageEndAt   DateTime?
-  reviewStageStartAt      DateTime?
-  reviewStageEndAt        DateTime?
-  testingStageStartAt     DateTime?
-  testingStageEndAt       DateTime?
-  finishStageStartAt      DateTime?
-  finishStageEndAt        DateTime?
+  id            Int       @id @default(autoincrement())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt()
+  projectId     Int
+  iid           Int
+  url           String
+  lastAction    Action
+  developmentAt DateTime
+  reviewAt      DateTime?
+  testingAt     DateTime?
+  finishAt      DateTime?
 }
