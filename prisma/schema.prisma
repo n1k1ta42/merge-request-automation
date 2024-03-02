@@ -14,14 +14,53 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model MergeRequest {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt()
+enum MergeRequestStatus {
+  development
+  review
+  testing
+  finish
 }
 
-model Stage {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt()
+enum Action {
+  open
+  close
+  reopen
+  update
+  approved
+  unapproved
+  approval
+  unapproval
+  merge
+}
+
+model MergeRequest {
+  id        Int                @id @default(autoincrement())
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt()
+  status    MergeRequestStatus @default(development)
+
+  authorId       Int
+  authorName     String
+  authorUsername String
+
+  repositoryName     String
+  repositoryHomepage String
+
+  targetBranch String
+  assigneeIds  Int[]
+  reviewerIds  Int[]
+  labels       String[]
+  isDraft      Boolean
+
+  lastAtion Action
+  state     Action
+
+  developmentStageStartAt DateTime
+  developmentStageEndAt   DateTime
+  reviewStageStartAt      DateTime
+  reviewStageEndAt        DateTime
+  testingStageStartAt     DateTime
+  testingStageEndAt       DateTime
+  finishStageStartAt      DateTime
+  finishStageEndAt        DateTime
 }
