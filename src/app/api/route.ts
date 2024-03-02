@@ -14,8 +14,11 @@ export async function POST(request: Request) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: 'Draft: Тест',
+          reviewer_ids: [3],
         }),
+        // body: JSON.stringify({
+        //   title: 'Draft: Тест',
+        // }),
       },
     )
   }
