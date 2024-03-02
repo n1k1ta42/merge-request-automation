@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 export async function POST(request: Request) {
   const data = await request.json()
   if (data.object_attributes.action === 'open') {
-    const newMergeRequest = await prisma.mergeRequest.create({
+    await prisma.mergeRequest.create({
       data: {
         status: 'development',
         authorId: parseInt(data.author.id),
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
         targetBranch: data.object_attributes.target_branch,
         lastAtion: data.object_attributes.action,
         state: data.object_attributes.state,
-        developmentStageStartAt: Date.now().toString(),
+        developmentStageStartAt: new Date(),
       },
     })
     await fetch(
