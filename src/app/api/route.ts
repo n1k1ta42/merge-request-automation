@@ -8,9 +8,9 @@ export async function POST(request: Request) {
     await prisma.mergeRequest.create({
       data: {
         status: 'development',
-        authorId: parseInt(data.author.id),
-        authorName: data.author.name,
-        authorUsername: data.author.username,
+        authorId: parseInt(data.user.id),
+        authorName: data.user.name,
+        authorUsername: data.user.username,
         repositoryName: data.repository.name,
         repositoryHomepage: data.repository.homepage,
         targetBranch: data.object_attributes.target_branch,
