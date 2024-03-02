@@ -34,27 +34,22 @@ enum Action {
 }
 
 model MergeRequest {
-  id        Int                @id @default(autoincrement())
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt()
-  status    MergeRequestStatus @default(development)
-
-  authorId       Int
-  authorName     String
-  authorUsername String
-
-  repositoryName     String
-  repositoryHomepage String
-
-  targetBranch String
-  assigneeIds  Int[]
-  reviewerIds  Int[]
-  labels       String[]
-  isDraft      Boolean
-
-  lastAtion Action
-  state     Action
-
+  id                      Int                @id @default(autoincrement())
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt()
+  status                  MergeRequestStatus @default(development)
+  authorId                Int
+  authorName              String
+  authorUsername          String
+  repositoryName          String
+  repositoryHomepage      String
+  targetBranch            String
+  assigneeIds             Int[]
+  reviewerIds             Int[]
+  labels                  String[]
+  isDraft                 Boolean
+  lastAtion               Action
+  state                   Action
   developmentStageStartAt DateTime
   developmentStageEndAt   DateTime
   reviewStageStartAt      DateTime
