@@ -4,7 +4,6 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   const data = await request.json()
-  console.log(data.object_attributes)
   if (data.object_attributes.action === 'open') {
     await fetch(
       `https://git.yamal-media.ru/api/v4/projects/${data.object_attributes.target_project_id}/merge_requests${data.object_attributes.iid}`,
